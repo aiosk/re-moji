@@ -1,0 +1,1 @@
+gsutil -m rm gs://www.developyuk.com/re-moji/**
