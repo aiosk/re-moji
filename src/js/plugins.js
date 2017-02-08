@@ -1,4 +1,4 @@
-const emojiListValue = [];
+let emojiListValue = [];
 $.widget('pls.emojiKeyboard', {
     options: {
         emojiList: [
@@ -20,7 +20,8 @@ $.widget('pls.emojiKeyboard', {
         const $select = this.element.find('select');
         const $options = $select.find('option');
         if (!$options.length) {
-            const html = this._arrToOption(this.options.emojiList);
+            const newArr = shuffle(this.options.emojiList);
+            const html = this._arrToOption(newArr);
             $select.empty().append(html);
         } else {
             console.info('option exist');
@@ -39,7 +40,7 @@ $.widget('pls.emojiKeyboard', {
   <a href="#" data-val="${$(n).val()}" >${emojione.shortnameToImage($(n).val())}</a>
 </li>`
         }).get();
-        htmlLi = `<ul class="animated slideOutDown">${htmlLi.join('')}</ul>`;
+        htmlLi = `<ul class="">${htmlLi.join('')}</ul>`;
         this.element
             .find('ul').remove().end().append(htmlLi)
             .off('click', 'a')
@@ -66,18 +67,25 @@ $.widget('pls.emojiKeyboard', {
         const $ul = this.element.find('ul');
         const $options = $select.find('option');
         $options.prop('selected', false);
-        $ul.find('a').removeClass().addClass('animated wobble');
+        $ul.find('a').removeClass();
+        emojiListValue = [];
     },
     val() {
         return emojiListValue;
     },
+    _getEffectIn(){
+        return ['xlarge', 'xxlarge'].indexOf(Foundation.MediaQuery.current) > -1 ? 'slideInRight' : 'slideInUp';
+    },
+    _getEffectOut(){
+        return ['xlarge', 'xxlarge'].indexOf(Foundation.MediaQuery.current) > -1 ? 'slideOutRight' : 'slideOutDown';
+    },
     open() {
         this.element.find('ul').removeClass()
-            .addClass('animated slideInUp');
+            .addClass(`animated ${this._getEffectIn()}`);
     },
     close() {
         this.element.find('ul').removeClass()
-            .addClass('animated slideOutDown');
+            .addClass(`animated ${this._getEffectOut()}`);
     },
     randomize() {
         const $select = this.element.find('select');
@@ -88,6 +96,6 @@ $.widget('pls.emojiKeyboard', {
         const html = this._arrToOption(newArr);
         $select.empty().append(html);
         this._create();
-        this.open()
+        // this.open()
     }
 });
