@@ -18,7 +18,7 @@
       right: 0;
       left: 0;
       width: 100%;
-      height: 30vh;
+      height: 33vh;
     }
     @include breakpoint(small) {
       @include grid-layout(6, 'li');
@@ -58,8 +58,5 @@
     @include breakpoint(large) {
       height: 3rem;
     }
-    //@include breakpoint(portrait) {
-    //  height: 2rem;
-    //}
   }
 }

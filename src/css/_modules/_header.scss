@@ -5,7 +5,7 @@ header {
   .logo {
 
     float: left;
-    background: url('#{$img-location}/logo.icon.white.small#{$img-suffix}.png') center center no-repeat/contain;
+    background: url('#{$img-location}/logo.icon.white.small#{$img-suffix}.png') no-repeat center center/contain;
 
     width: $size;
     height: $size;
