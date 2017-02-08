@@ -1,6 +1,6 @@
 extends _layout/_master.pug
 block title
-    - let title = 'Re-moji';
+    - var title = 'Re-moji';
 block css
     link(rel='stylesheet', href='//cdn.jsdelivr.net/emojione/2.2.7/assets/css/emojione.min.css')
     link(rel='stylesheet', href='//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css')
@@ -25,5 +25,5 @@ block body
                 .eocon :tired_face:
                 .eocon :angry:
             section.content__buttons
-                .content__buttons--play: a(href='/re-moji/play/index.html') Main Re-moji
-                .content__buttons--about: a(href='/re-moji/about/index.html') Apa itu Re-moji?
+                .content__buttons--play: a(href='play/index.html') Main Re-moji
+                .content__buttons--about: a(href='about/index.html') Apa itu Re-moji?

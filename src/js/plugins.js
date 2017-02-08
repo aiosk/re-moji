@@ -46,6 +46,7 @@ $.widget('pls.emojiKeyboard', {
             .off('click', 'a')
             .on('click', 'a', e => {
                 e.preventDefault();
+                e.stopPropagation();
                 const $this = $(e.target).closest('a');
                 const $option = $select.find(`option[value="${$this.data('val')}"]`);
 
@@ -79,9 +80,15 @@ $.widget('pls.emojiKeyboard', {
     _getEffectOut(){
         return ['xlarge', 'xxlarge'].indexOf(Foundation.MediaQuery.current) > -1 ? 'slideOutRight' : 'slideOutDown';
     },
+    isOpen() {
+        return this.element.find('ul').hasClass(this._getEffectIn());
+    },
     open() {
         this.element.find('ul').removeClass()
             .addClass(`animated ${this._getEffectIn()}`);
+    },
+    isClose() {
+        return this.element.find('ul').hasClass(this._getEffectOut());
     },
     close() {
         this.element.find('ul').removeClass()
@@ -92,7 +99,7 @@ $.widget('pls.emojiKeyboard', {
         const $options = $select.find('option');
         const oldArr = $options.map((i, n)=>$(n).val()).get();
         const newArr = shuffle(oldArr);
-
+        this.clear();
         const html = this._arrToOption(newArr);
         $select.empty().append(html);
         this._create();

@@ -1,9 +1,10 @@
 extends ../index.pug
 block title
-    - let title = 'Play Re-moji';
+    - var title = 'Play Re-moji';
 block css
     link(rel='stylesheet', href='//cdn.jsdelivr.net/emojione/2.2.7/assets/css/emojione.min.css')
     link(rel='stylesheet', href='//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css')
+    link(rel='stylesheet', href='//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css')
 
     link(rel='stylesheet', href='../css/main.css')
 
@@ -16,8 +17,6 @@ block body-js
     script(src='../js/plugins.js')
 
 block content
-    button.open open
-    button.close close
     button.randomize randomize
     button.value value
     button.clear clear

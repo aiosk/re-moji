@@ -17,33 +17,33 @@ const shuffle = (array)=> {
 
     return array;
 };
-
 $(() => {
-    $(document).foundation(); 
     const emojiKeyboard = $('.emoji-keyboard').emojiKeyboard();
 
-    $('button.open').on('click', e => {
-        e.preventDefault();
-        emojiKeyboard.emojiKeyboard('open');
-    });
-    $('button.open').trigger('click');
-    // emojiKeyboard.emojiKeyboard('open');
-
-    $('button.close').on('click', e => {
-        e.preventDefault();
-        emojiKeyboard.emojiKeyboard('close');
-    });
+    $(document).foundation()
+	    .on('click', e => {
+			if(emojiKeyboard.emojiKeyboard('isOpen')){
+			    emojiKeyboard.emojiKeyboard('close');
+			} else if(emojiKeyboard.emojiKeyboard('isClose')){
+			    emojiKeyboard.emojiKeyboard('open');
+			}
+		});
+    
+    emojiKeyboard.emojiKeyboard('open');
 
     $('button.randomize').on('click', e => {
         e.preventDefault();
+		e.stopPropagation();
         emojiKeyboard.emojiKeyboard('randomize');
     });
     $('button.clear').on('click', e => {
         e.preventDefault();
+		e.stopPropagation();
         emojiKeyboard.emojiKeyboard('clear');
     });
     $('button.value').on('click', e => {
         e.preventDefault();
+		e.stopPropagation();
         const val = emojiKeyboard.emojiKeyboard('val');
         alert(JSON.stringify(val));
     });
