@@ -1,0 +1,20 @@
+header {
+  @include clearfix;
+  margin: 1rem;
+  $size: 3rem;
+  .logo {
+
+    float: left;
+    background: url('#{$img-location}/logo.icon.white.small#{$img-suffix}.png') center center no-repeat/contain;
+
+    width: $size;
+    height: $size;
+  }
+  a {
+    color: map_get($color, yellow);
+    margin-top: $size - 2rem;
+    float: right;
+    text-decoration: none;
+    font-weight: bold;
+  }
+}
