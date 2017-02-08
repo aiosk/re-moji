@@ -1,0 +1,14 @@
+extends _layout/master.pug
+block css
+    link(rel='stylesheet', href='//cdn.jsdelivr.net/emojione/2.2.7/assets/css/emojione.min.css')
+block body-js
+    script(src='//code.jquery.com/ui/1.12.1/jquery-ui.min.js')
+    script(src='//cdn.jsdelivr.net/emojione/2.2.7/lib/js/emojione.min.js')
+block body
+    //button.open open
+    //button.close close
+    //button.randomize randomize
+    //button.value value
+    //button.clear clear
+    .emoji-keyboard
+        select(multiple)

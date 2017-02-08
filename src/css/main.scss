@@ -1,0 +1,7 @@
+@import "../../node_modules/foundation-sites/scss/foundation";
+@import "../../node_modules/sass-bem/bem";
+
+@include foundation-global-styles;
+
+@import "_modules/emoji-board";
+@import "_modules/button";

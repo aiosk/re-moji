@@ -1,0 +1,60 @@
+
+.emoji-keyboard {
+  select {
+    display: none;
+  }
+}
+
+.emoji-keyboard {
+  ul {
+    list-style: none;
+    padding: .5rem 0;
+    margin: 0;
+    position: absolute;
+    overflow-y: scroll;
+    background: $light-gray;
+    @include breakpoint(large down) {
+      bottom: 0;
+      width: 100%;
+      height: 33vh;
+    }
+    @include breakpoint(small) {
+      @include grid-layout(6, 'li');
+    }
+    @include breakpoint(medium) {
+      @include grid-layout(8, 'li');
+    }
+    @include breakpoint(xlarge landscape) {
+      @include grid-layout(4, 'li');
+
+      right: 0;
+      height: 100%;
+      width: 33vw;
+    }
+
+  }
+  li {
+
+  }
+  a {
+    display: block;
+    padding: .25rem;
+    margin: .125rem;
+    text-align: center;
+
+    &.is-active {
+      background: $medium-gray;
+    }
+  }
+  img.emojione {
+    @include breakpoint(small) {
+      height: 2rem;
+    }
+    @include breakpoint(medium) {
+      height: 3rem;
+    }
+    //@include breakpoint(portrait) {
+    //  height: 2rem;
+    //}
+  }
+}
