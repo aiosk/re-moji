@@ -1,3 +1,11 @@
+@keyframes blink {
+  0% { color: map_get($color, yellow); }
+  100% { color: map_get($color, purple); }
+}
+@-webkit-keyframes blink {
+  0% { color: map_get($color, yellow); }
+  100% { color: map_get($color, purple); }
+}
 header {
   @include clearfix;
   margin: 1rem;
@@ -11,6 +19,10 @@ header {
     height: $size;
   }
   a {
+    -webkit-animation: blink 1s linear infinite;
+    -moz-animation: blink 1s linear infinite;
+    animation: blink 1s linear infinite;
+
     color: map_get($color, yellow);
     margin-top: $size - 2rem;
     float: right;
