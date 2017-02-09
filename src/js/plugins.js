@@ -32,7 +32,7 @@ $.widget('pls.emojiKeyboard', {
         return arr.map((v, i) => `<option value="${v}">${v}</option>`)
     },
     _toggleSendButton() {
-        const button = this.element.find('i:contains(send)');
+        const button = this.element.find('i.material-icons');
         if (emojiListValue.length > 0) {
             button.addClass('is-active');
         } else {
@@ -53,7 +53,8 @@ $.widget('pls.emojiKeyboard', {
     <div class="emoji-keyboard__answers">
         <div class="emoji-keyboard__answer">&nbsp;</div>
         <div class="emoji-keyboard__send">
-            <i class="material-icons">send</i>        
+            <i class="material-icons clear">clear</i>
+            <i class="material-icons send">send</i>        
         </div>
     </div>
     <ul class="">${htmlLi.join('')}</ul>
@@ -104,6 +105,31 @@ $.widget('pls.emojiKeyboard', {
             .on('click', 'i:contains(send)', e => {
                 e.preventDefault();
                 e.stopPropagation();
+
+                const $this = $(e.target);
+                if ($this.hasClass('is-active')) {
+                    $this.addClass('animated bounceIn')
+                        .one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', e=> {
+                            $this.removeClass('animated bounceIn')
+                            alert(JSON.stringify(this.val()));
+                        });
+                }
+
+            })
+            .off('click', 'i:contains(clear)')
+            .on('click', 'i:contains(clear)', e => {
+                e.preventDefault();
+                e.stopPropagation();
+
+                const $this = $(e.target);
+                if ($this.hasClass('is-active')) {
+                    $this.addClass('animated bounceIn')
+                        .one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', e=> {
+                            $this.removeClass('animated bounceIn')
+                        });
+                }
+
+                this.clear()
             })
     },
     clear() {
