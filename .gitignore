@@ -1,7 +1,7 @@
 .idea/
-dist/*.html
-dist/css/
-dist/js/
+dist/**/*.html
+dist/css/*.css
+dist/js/*.js
 
 # Created by https://www.gitignore.io/api/node,webstorm
 
