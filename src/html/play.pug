@@ -1,4 +1,4 @@
-extends ../index.pug
+extends index.pug
 block title
     - var title = 'Play Re-moji';
 block css
@@ -52,19 +52,8 @@ block body-script
                 e.preventDefault();e.stopPropagation();
                 emojiKeyboard.emojiKeyboard('randomize');
             });
-            $('button.clear').on('click', e => {
-                e.preventDefault();e.stopPropagation();
-                emojiKeyboard.emojiKeyboard('clear');
-            });
-            $('button.value').on('click', e => {
-                e.preventDefault();e.stopPropagation();
-                const val = emojiKeyboard.emojiKeyboard('val');
-                alert(JSON.stringify(val));
-            });
         });
 block content
     button.randomize randomize
-    button.value value
-    button.clear clear
     .emoji-keyboard
         select(multiple)
