@@ -17,3 +17,36 @@ const shuffle = (array)=> {
 
     return array;
 };
+
+function hideAddressBar() {
+    if (!window.location.hash) {
+        if (document.height < window.outerHeight) {
+            document.body.style.height = (window.outerHeight + 50) + 'px';
+        }
+
+        setTimeout(function () {
+            window.scrollTo(0, 1);
+        }, 50);
+    }
+}
+
+window.addEventListener("load", function () {
+    if (!window.pageYOffset) {
+        hideAddressBar();
+    }
+});
+window.addEventListener("orientationchange", hideAddressBar);
+
+$(() => {
+    const emojiKeyboard = $('.emoji-keyboard').emojiKeyboard().emojiKeyboard('open');
+
+    $(document)
+        .on('click', e => {
+            if (emojiKeyboard.emojiKeyboard('isOpen')) {
+                emojiKeyboard.emojiKeyboard('close');
+            } else if (emojiKeyboard.emojiKeyboard('isClose')) {
+                emojiKeyboard.emojiKeyboard('open');
+            }
+        })
+        .foundation();
+});

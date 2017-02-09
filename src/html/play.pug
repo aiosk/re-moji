@@ -16,44 +16,7 @@ block body-js
 
     script(src='../js/play.js')
     script(src='../js/plugins.js')
-block body-script
-    :babel(presets=['es2015'])
-        function hideAddressBar()
-        {
-          if(!window.location.hash)
-          {
-              if(document.height < window.outerHeight)
-              {
-                  document.body.style.height = (window.outerHeight + 50) + 'px';
-              }
 
-              setTimeout( function(){ window.scrollTo(0, 1); }, 50 );
-          }
-        }
-
-        window.addEventListener("load", function(){ if(!window.pageYOffset){ hideAddressBar(); } } );
-        window.addEventListener("orientationchange", hideAddressBar );
-
-        $(() => {
-            const emojiKeyboard = $('.emoji-keyboard').emojiKeyboard();
-
-            $(document).foundation()
-                .on('click', e => {
-                    if(emojiKeyboard.emojiKeyboard('isOpen')){
-                        emojiKeyboard.emojiKeyboard('close');
-                    } else if(emojiKeyboard.emojiKeyboard('isClose')){
-                        emojiKeyboard.emojiKeyboard('open');
-                    }
-                });
-
-            emojiKeyboard.emojiKeyboard('open');
-
-            $('button.randomize').on('click', e => {
-                e.preventDefault();e.stopPropagation();
-                emojiKeyboard.emojiKeyboard('randomize');
-            });
-        });
 block content
-    button.randomize randomize
     .emoji-keyboard
         select(multiple)

@@ -110,8 +110,8 @@ $.widget('pls.emojiKeyboard', {
                 if ($this.hasClass('is-active')) {
                     $this.addClass('animated bounceIn')
                         .one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', e=> {
-                            $this.removeClass('animated bounceIn')
-                            alert(JSON.stringify(this.val()));
+                            $this.removeClass('animated bounceIn');
+                            this.randomize();
                         });
                 }
 
