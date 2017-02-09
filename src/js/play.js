@@ -17,34 +17,3 @@ const shuffle = (array)=> {
 
     return array;
 };
-$(() => {
-    const emojiKeyboard = $('.emoji-keyboard').emojiKeyboard();
-
-    $(document).foundation()
-	    .on('click', e => {
-			if(emojiKeyboard.emojiKeyboard('isOpen')){
-			    emojiKeyboard.emojiKeyboard('close');
-			} else if(emojiKeyboard.emojiKeyboard('isClose')){
-			    emojiKeyboard.emojiKeyboard('open');
-			}
-		});
-    
-    emojiKeyboard.emojiKeyboard('open');
-
-    $('button.randomize').on('click', e => {
-        e.preventDefault();
-		e.stopPropagation();
-        emojiKeyboard.emojiKeyboard('randomize');
-    });
-    $('button.clear').on('click', e => {
-        e.preventDefault();
-		e.stopPropagation();
-        emojiKeyboard.emojiKeyboard('clear');
-    });
-    $('button.value').on('click', e => {
-        e.preventDefault();
-		e.stopPropagation();
-        const val = emojiKeyboard.emojiKeyboard('val');
-        alert(JSON.stringify(val));
-    });
-});

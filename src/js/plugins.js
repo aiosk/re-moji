@@ -31,6 +31,14 @@ $.widget('pls.emojiKeyboard', {
     _arrToOption(arr){
         return arr.map((v, i) => `<option value="${v}">${v}</option>`)
     },
+    _toggleSendButton() {
+        const button = this.element.find('i:contains(send)');
+        if (emojiListValue.length > 0) {
+            button.addClass('is-active');
+        } else {
+            button.removeClass('is-active');
+        }
+    },
     _render() {
         const $select = this.element.find('select');
         const $options = $select.find('option');
@@ -40,36 +48,76 @@ $.widget('pls.emojiKeyboard', {
   <a href="#" data-val="${$(n).val()}" >${emojione.shortnameToImage($(n).val())}</a>
 </li>`
         }).get();
-        htmlLi = `<ul class="">${htmlLi.join('')}</ul>`;
+
+        htmlLi = `<div class="emoji-keyboard__board">
+    <div class="emoji-keyboard__answers">
+        <div class="emoji-keyboard__answer">&nbsp;</div>
+        <div class="emoji-keyboard__send">
+            <i class="material-icons">send</i>        
+        </div>
+    </div>
+    <ul class="">${htmlLi.join('')}</ul>
+</div>`;
+
+        const updateAnswer = ()=> {
+            const html = emojione.shortnameToImage(this.val().join(''));
+            this.element.find('.emoji-keyboard__answer').empty().append(html);
+        };
+
         this.element
-            .find('ul').remove().end().append(htmlLi)
-            .off('click', 'a')
+            .find('.emoji-keyboard__board').remove().end()
+            .append(htmlLi);
+        this.element.off('click', 'a')
             .on('click', 'a', e => {
                 e.preventDefault();
                 e.stopPropagation();
                 const $this = $(e.target).closest('a');
                 const $option = $select.find(`option[value="${$this.data('val')}"]`);
 
-                if ($option.prop('selected')) {
-                    $this.removeClass().addClass('animated wobble');
-                    $option.prop('selected', false);
-                    var index = emojiListValue.indexOf($option.val());
-                    if (index !== -1) emojiListValue.splice(index, 1);
-                } else {
-                    $this.removeClass().addClass('is-active animated tada');
-                    $option.prop('selected', true);
-                    emojiListValue.push($option.val());
-                }
+                $this.removeClass().addClass('animated tada');
+                $option.prop('selected', true);
+                emojiListValue.push($option.val());
 
+                this._toggleSendButton();
+                updateAnswer()
+            })
+            .on('click', '.emoji-keyboard__answer', e=> {
+                e.preventDefault();
+                e.stopPropagation();
+            })
+            .off('click', '.emoji-keyboard__answer img')
+            .on('click', '.emoji-keyboard__answer img', e => {
+                e.preventDefault();
+                e.stopPropagation();
+
+                const $this = $(e.target);
+                const $option = $select.find(`option[value="${$this.attr('title')}"]`);
+
+                $this.removeClass().addClass('animated fadeOut')
+                    .one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', e=> $this.remove());
+                $option.prop('selected', false);
+                var index = emojiListValue.indexOf($option.val());
+                if (index !== -1) emojiListValue.splice(index, 1);
+                this._toggleSendButton();
+            })
+            .off('click', 'i:contains(send)')
+            .on('click', 'i:contains(send)', e => {
+                e.preventDefault();
+                e.stopPropagation();
             })
     },
     clear() {
         const $select = this.element.find('select');
         const $ul = this.element.find('ul');
+        const $answer = this.element.find('.emoji-keyboard__answer');
         const $options = $select.find('option');
+
+        emojiListValue = [];
         $options.prop('selected', false);
         $ul.find('a').removeClass();
-        emojiListValue = [];
+        $answer.empty();
+        console.log($answer);
+        this._toggleSendButton();
     },
     val() {
         return emojiListValue;
@@ -81,17 +129,19 @@ $.widget('pls.emojiKeyboard', {
         return ['xlarge', 'xxlarge'].indexOf(Foundation.MediaQuery.current) > -1 ? 'slideOutRight' : 'slideOutDown';
     },
     isOpen() {
-        return this.element.find('ul').hasClass(this._getEffectIn());
+        return this.element.find('.emoji-keyboard__board').hasClass(this._getEffectIn());
     },
     open() {
-        this.element.find('ul').removeClass()
+        this.element.find('.emoji-keyboard__board')
+            .removeClass(`animated ${this._getEffectIn()} ${this._getEffectOut()}`)
             .addClass(`animated ${this._getEffectIn()}`);
     },
     isClose() {
-        return this.element.find('ul').hasClass(this._getEffectOut());
+        return this.element.find('.emoji-keyboard__board').hasClass(this._getEffectOut());
     },
     close() {
-        this.element.find('ul').removeClass()
+        this.element.find('.emoji-keyboard__board')
+            .removeClass(`animated ${this._getEffectIn()} ${this._getEffectOut()}`)
             .addClass(`animated ${this._getEffectOut()}`);
     },
     randomize() {
@@ -99,6 +149,7 @@ $.widget('pls.emojiKeyboard', {
         const $options = $select.find('option');
         const oldArr = $options.map((i, n)=>$(n).val()).get();
         const newArr = shuffle(oldArr);
+
         this.clear();
         const html = this._arrToOption(newArr);
         $select.empty().append(html);
