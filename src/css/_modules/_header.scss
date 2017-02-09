@@ -1,0 +1,32 @@
+@keyframes blink {
+  0% { color: map_get($color, yellow); }
+  100% { color: map_get($color, purple); }
+}
+@-webkit-keyframes blink {
+  0% { color: map_get($color, yellow); }
+  100% { color: map_get($color, purple); }
+}
+header {
+  @include clearfix;
+  margin: 1rem;
+  $size: 3rem;
+  .logo {
+
+    float: left;
+    background: url('#{$img-location}/logo.icon.white.small#{$img-suffix}.png') no-repeat center center/contain;
+
+    width: $size;
+    height: $size;
+  }
+  a {
+    -webkit-animation: blink 1s linear infinite;
+    -moz-animation: blink 1s linear infinite;
+    animation: blink 1s linear infinite;
+
+    color: map_get($color, yellow);
+    margin-top: $size - 2rem;
+    float: right;
+    text-decoration: none;
+    font-weight: bold;
+  }
+}

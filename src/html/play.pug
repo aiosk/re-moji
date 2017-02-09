@@ -1,0 +1,22 @@
+extends index.pug
+block title
+    - var title = 'Play Re-moji';
+block css
+    link(rel='stylesheet', href='//cdn.jsdelivr.net/emojione/2.2.7/assets/css/emojione.min.css')
+    link(rel='stylesheet', href='//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css')
+    link(rel='stylesheet', href='//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css')
+    link(rel='stylesheet', href='//fonts.googleapis.com/icon?family=Material+Icons')
+
+    link(rel='stylesheet', href='../css/main.css')
+
+block body-js
+    script(src='//code.jquery.com/ui/1.12.1/jquery-ui.min.js')
+    script(src='//cdn.jsdelivr.net/emojione/2.2.7/lib/js/emojione.min.js')
+    script(src='//cdn.jsdelivr.net/foundation/6.2.4/foundation.min.js')
+
+    script(src='../js/play.js')
+    script(src='../js/plugins.js')
+
+block content
+    .emoji-keyboard
+        select(multiple)

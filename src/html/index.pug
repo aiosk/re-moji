@@ -1,0 +1,29 @@
+extends _layout/_master.pug
+block title
+    - var title = 'Re-moji';
+block css
+    link(rel='stylesheet', href='//cdn.jsdelivr.net/emojione/2.2.7/assets/css/emojione.min.css')
+    link(rel='stylesheet', href='//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css')
+
+    link(rel='stylesheet', href='css/main.css')
+
+block body-js
+    script(src='//cdn.jsdelivr.net/emojione/2.2.7/lib/js/emojione.min.js')
+
+    script(src='js/main.js')
+
+block body
+    header
+        .logo
+        a(href='#') jangan klik!
+    block content
+        section.content
+            section.content__statement Seberapa bagus ingetan lu?
+            section.content__answers
+                .eocon :thinking:
+                .eocon :cry:
+                .eocon :tired_face:
+                .eocon :angry:
+            section.content__buttons
+                .content__buttons--play: a(href='./play.html') Main Re-moji
+                .content__buttons--about: a(href='./about.html') Apa itu Re-moji?

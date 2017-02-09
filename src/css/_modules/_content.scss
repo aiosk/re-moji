@@ -1,0 +1,75 @@
+@include b('content') {
+  $margin: 1rem;
+  color: #fff;
+  margin: $margin;
+  width: calc(100% - #{$margin});
+
+  @include breakpoint(medium only) {
+    @include breakpoint(portrait) {
+      @include vertical-center;
+    }
+  }
+  @include breakpoint(large) {
+    @include vertical-center;
+  }
+}
+
+@include b('content') {
+  $space: 4rem;
+  @include e('statement') {
+    text-transform: uppercase;
+    font-size: 2.1rem;
+    font-weight: bold;
+    margin-top: $space/2;
+    margin-bottom: $space;
+    text-align: center;
+    color: map_get($color, purple);
+  }
+
+  @include e('answers') {
+    $sizeicon: 4rem;
+    @include grid-row($size: $sizeicon*3);
+
+    .eocon {
+      @include grid-col(6, 0);
+      display: block;
+      text-align: center;
+      img {
+        height: $sizeicon;
+      }
+      &:nth-child(1), &:nth-child(2) {
+        margin-bottom: $space/2;
+      }
+    }
+  }
+  @include e('buttons') {
+
+    margin-top: $space;
+    text-align: center;
+
+    @include p('m:play', 'm:about') {
+      a {
+        width: 10rem;
+        padding: .5rem 1rem;
+        font-weight: bold;
+        display: block;
+        margin: 0 auto $space/4 auto;
+        text-decoration: none;
+      }
+    }
+    @include m('play') {
+      a {
+        color: map_get($color, purple);
+        background: map_get($color, yellow);
+      }
+    }
+    @include m('about') {
+      a {
+        color: map_get($color, yellow);
+        background: map_get($color, purple);
+      }
+    }
+
+  }
+
+}

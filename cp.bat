@@ -1,0 +1,1 @@
+gsutil -m -h "Cache-Control:public, max-age=604800" -h "Content-Encoding:gzip" cp -Z -a public-read -r . gs://pr.developyuk.com/
